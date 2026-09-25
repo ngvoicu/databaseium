@@ -116,7 +116,7 @@ No `ALTER` anywhere. The table reads as if it had always been this way.
 | Tool | Approach | Difference |
 |---|---|---|
 | Liquibase, Flyway | Ordered changesets, a history table, rollbacks, per-environment targeting | The chain only grows; the current schema exists only in a live database |
-| Rails `schema.rb` / `structure.sql` | A regenerated snapshot next to the migrations; new databases load it | The closest in spirit, but Rails-only. Migrations stay in the tree until someone deletes them by hand, and rollbacks aren't verified. |
+| Rails `schema.rb` / `structure.sql`, dbmate | A schema dump regenerated next to the migrations; new databases can load it | The closest in spirit. But the migrations stay in the tree until someone deletes them by hand, and rollbacks aren't verified. |
 | Django `squashmigrations` | Squash a range of migrations on demand | Manual and Django-only; the result is still a chain |
 | Atlas, Skeema, sqldef, Prisma, Supabase declarative schemas | Edit the desired state; the tool generates the diff | A diff can't reliably tell a rename from a drop-and-add, or express a backfill or a multi-step zero-downtime change. Nautilith keeps you in control of the change and keeps the desired state for you. |
 | graphile-migrate | Iterate on `current.sql`, then commit it | The committed history is still a chain |
